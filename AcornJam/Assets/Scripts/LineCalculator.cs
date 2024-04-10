@@ -66,6 +66,7 @@ public class LineCalculator : MonoBehaviour
                     continue;
                 if (TryExpand == S_Expansion.EdgeWithPreviousCell)
                     continue;
+                if (gridManager.GetCellPosFromEdge(S_Expansion.x, S_Expansion.y, TryExpand).x >= 0)  
                 NewExpansions.Add(TryExpand);
                 break;
             }          
