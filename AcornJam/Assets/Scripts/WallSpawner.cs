@@ -11,6 +11,8 @@ public class WallSpawner : MonoBehaviour
     [SerializeField] private WallPosData wallPosData;
 
     [SerializeField] private GameObject[] wallObj;
+
+    [SerializeField] private Transform WallParent;
     
     public void GenerateAllTheWalls()
     {
@@ -34,7 +36,7 @@ public class WallSpawner : MonoBehaviour
         Vector3 pos = gridManager.gridCells[x, y].transform.position;
         pos += wallPosData.GetEdgePos(edge).position;
         quaternion rot = wallPosData.GetEdgePos(edge).rotation;
-        Instantiate(GetWall(), pos, rot);
+        Instantiate(GetWall(), pos, rot, WallParent);
     }
     
     private GameObject GetWall()
