@@ -14,11 +14,60 @@ public class GridManager : MonoBehaviour
         Instance = this;
     }
 
+    public void CreateEdge(int x, int y, int edge)
+    {
+        gridCells[x, y].edgeStates[edge] = EdgeState.filled;
+        FillOtherEdge(x, y, edge);
+    }
+
+    public void FillOtherEdge(int x, int y, int edge)
+    {
+        Vector2Int otherCell = (GetCellPosFromEdge(x, y, edge));
+        if (otherCell.x < 0)
+            return ;
+
+        int WhichEdge = CalculateWhichEdgeFromCell(otherCell.x, otherCell.y, x, y);
+        if (WhichEdge == -1)
+            return;
+        gridCells[otherCell.x, otherCell.y].edgeStates[WhichEdge] = EdgeState.filled;
+
+    }
+    public void EmptyOtherEdge(int x, int y, int edge)
+    {
+        Vector2Int otherCell = (GetCellPosFromEdge(x, y, edge));
+        if (otherCell.x < 0)
+            return;
+
+        int WhichEdge = CalculateWhichEdgeFromCell(otherCell.x, otherCell.y, x, y);
+        if (WhichEdge == -1)
+            return;
+        gridCells[otherCell.x, otherCell.y].edgeStates[WhichEdge] = EdgeState.empty;
+
+    }
+    public int CalculateWhichEdgeFromCell(int x1, int y1, int x2, int y2)
+    {
+        for(int i = 0; i < 6; i++)
+        {
+            if(GetGridCellFromEdge(x1, y1, i) == gridCells[x2, y2])
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private Vector2Int GetCellPosFromEdge(int x, int y, int Whichedge)
+    {
+        Vector2Int vPos = CalculateCellFromEdge(x, y, Whichedge);
+        if(isValidCell(vPos))
+            return vPos;
+        return new Vector2Int(-1, -1);
+    }
     public GridCell GetGridCellFromEdge(int x, int y, int Whichedge)
     {
         Vector2Int vPos = CalculateCellFromEdge(x, y, Whichedge);
 
-        if (vPos.x < 0 || vPos.x > gridCells.GetLength(0) || vPos.y < 0 || vPos.y > gridCells.GetLength(1))
+        if (!isValidCell(x,y))
             return null;
 
         return gridCells[vPos.x, vPos.y];
@@ -50,5 +99,17 @@ public class GridManager : MonoBehaviour
 
         return new Vector2Int(x, y);
     }
-    
+
+    public bool isValidCell(int x, int y)
+    {
+        return isValidCell(new Vector2Int(x, y));
+    }
+
+    public bool isValidCell(Vector2Int vPos)
+    {
+        if (vPos.x < 0 || vPos.x > gridCells.GetLength(0) || vPos.y < 0 || vPos.y > gridCells.GetLength(1))
+            return false;
+        return true;
+    }
+
 }
