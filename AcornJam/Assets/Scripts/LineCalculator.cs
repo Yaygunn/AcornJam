@@ -23,7 +23,7 @@ public class LineCalculator : MonoBehaviour
     GridCell[,] cells { get { return gridManager.gridCells; } }
 
     List<S_ExpansionEdge> listExpension = new List<S_ExpansionEdge>();
-    
+
     public void CalculateEdges()
     {
         StartCalculation();

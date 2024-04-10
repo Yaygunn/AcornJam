@@ -8,13 +8,7 @@ public class GridGeneration : MonoBehaviour
     public Vector2Int gridSize; // Number of rows and columns in the grid
     public GridCell gridCellPrefab; // Prefab for the hexagonal cell
 
-    
-    private void Start()
-    {
-        GenerateHexagonalGrid();
-    }
-
-    private void GenerateHexagonalGrid()
+    public void GenerateHexagonalGrid()
     {
         GridManager.Instance.gridCells = new GridCell[gridSize.x, gridSize.y];
         for (int row = 0; row < gridSize.y; row++)
@@ -30,7 +24,7 @@ public class GridGeneration : MonoBehaviour
     private Vector3 CalculateHexagonPosition(int row, int col)
     {
         float xOffset = row * edgeLength;
-        float yOffset = col * 0.75f * edgeLength;
+        float yOffset = col * 0.835f * edgeLength;
 
         if (col % 2 == 1) // Offset every other row
             xOffset += 0.5f * edgeLength;
