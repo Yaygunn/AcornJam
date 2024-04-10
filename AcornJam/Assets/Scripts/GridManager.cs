@@ -56,7 +56,7 @@ public class GridManager : MonoBehaviour
         return -1;
     }
 
-    private Vector2Int GetCellPosFromEdge(int x, int y, int Whichedge)
+    public Vector2Int GetCellPosFromEdge(int x, int y, int Whichedge)
     {
         Vector2Int vPos = CalculateCellFromEdge(x, y, Whichedge);
         if(isValidCell(vPos))
@@ -67,7 +67,7 @@ public class GridManager : MonoBehaviour
     {
         Vector2Int vPos = CalculateCellFromEdge(x, y, Whichedge);
 
-        if (!isValidCell(x,y))
+        if (!isValidCell(vPos.x, vPos.y)) 
             return null;
 
         return gridCells[vPos.x, vPos.y];
@@ -107,7 +107,7 @@ public class GridManager : MonoBehaviour
 
     public bool isValidCell(Vector2Int vPos)
     {
-        if (vPos.x < 0 || vPos.x > gridCells.GetLength(0) || vPos.y < 0 || vPos.y > gridCells.GetLength(1))
+        if (vPos.x < 0 || vPos.x >= gridCells.GetLength(0) || vPos.y < 0 || vPos.y >= gridCells.GetLength(1))
             return false;
         return true;
     }
