@@ -503,7 +503,10 @@ MonoBehaviour:
   gridManager: {fileID: 1998015117}
   wallPosData: {fileID: 1824388497098770622, guid: d17ddaf2c00d1f14c91613e9c71214d3,
     type: 3}
-  wallObj: {fileID: 5134886097350865735, guid: 96624189d92befe4192a8ce473c353bf, type: 3}
+  wallObj:
+  - {fileID: 5134886097350865735, guid: 96624189d92befe4192a8ce473c353bf, type: 3}
+  - {fileID: 774177933762290314, guid: 49083f5ce5193e84397f7eccff5f58b5, type: 3}
+  - {fileID: 2021877323651708521, guid: 0f1ec86fdc87fe94588d611a13d21295, type: 3}
 --- !u!4 &515877446
 Transform:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -9,7 +10,7 @@ public class WallSpawner : MonoBehaviour
 
     [SerializeField] private WallPosData wallPosData;
 
-    [SerializeField] private GameObject wallObj;
+    [SerializeField] private GameObject[] wallObj;
     
     public void GenerateAllTheWalls()
     {
@@ -33,6 +34,12 @@ public class WallSpawner : MonoBehaviour
         Vector3 pos = gridManager.gridCells[x, y].transform.position;
         pos += wallPosData.GetEdgePos(edge).position;
         quaternion rot = wallPosData.GetEdgePos(edge).rotation;
-        Instantiate(wallObj, pos, rot);
+        Instantiate(GetWall(), pos, rot);
+    }
+    
+    private GameObject GetWall()
+    {
+        int randomInt = UnityEngine.Random.Range(0, wallObj.Length);
+        return wallObj[randomInt];
     }
 }
