@@ -21,7 +21,7 @@ public class GridGeneration : MonoBehaviour
         {
             for (int col = 0; col < gridSize.x; col++)
             {
-                Vector3 position = CalculateHexagonPosition(row, col);
+                Vector3 position = CalculateHexagonPosition(col, row);
                 GridManager.Instance.gridCells[col, row] = Instantiate(gridCellPrefab, position, Quaternion.identity);
             }
         }
