@@ -6,8 +6,9 @@ public class GridGeneration : MonoBehaviour
 {
     public float edgeLength; // Length of each hexagon edge
     public Vector2Int gridSize; // Number of rows and columns in the grid
-    public GameObject gridCellPrefab; // Prefab for the hexagonal cell
+    public GridCell gridCellPrefab; // Prefab for the hexagonal cell
 
+    
     private void Start()
     {
         GenerateHexagonalGrid();
@@ -15,12 +16,13 @@ public class GridGeneration : MonoBehaviour
 
     private void GenerateHexagonalGrid()
     {
+        GridManager.Instance.gridCells = new GridCell[gridSize.x, gridSize.y];
         for (int row = 0; row < gridSize.y; row++)
         {
             for (int col = 0; col < gridSize.x; col++)
             {
                 Vector3 position = CalculateHexagonPosition(row, col);
-                Instantiate(gridCellPrefab, position, Quaternion.identity);
+                GridManager.Instance.gridCells[col, row] = Instantiate(gridCellPrefab, position, Quaternion.identity);
             }
         }
     }
