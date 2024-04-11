@@ -6,8 +6,12 @@ public class MovementController : MonoBehaviour
 {
     [SerializeField] CharacterController cc;
     [SerializeField] InputRecieve inputRecieve;
+    [SerializeField] Transform cam;
     [SerializeField] float Speed;
-    
+    [SerializeField] float LookSpeed;
+    float CurrentSpeed;
+
+
     void Start()
     {
         inputRecieve.MoveF = Movement;
@@ -22,10 +26,15 @@ public class MovementController : MonoBehaviour
 
     void Movement(Vector2 direction)
     {
-        cc.Move(new Vector3(direction.x, 0, direction.y) * Speed * Time.deltaTime);
+        Vector3 moveDir = transform.forward * direction.y + transform.right * direction.x;  
+        CurrentSpeed = moveDir.magnitude;
+        cc.Move(moveDir * Speed * Time.deltaTime);
     }
     void Rotate(Vector2 direction)
     {
-
+        transform.Rotate(Vector3.up * direction.x * LookSpeed  );
+        cam.transform.Rotate(Vector3.left * direction.y * LookSpeed);
     }
+
+    
 }
