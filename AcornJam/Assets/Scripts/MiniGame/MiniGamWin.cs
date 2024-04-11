@@ -9,9 +9,10 @@ public class MiniGamWin : MonoBehaviour
 
     bool whiteExists = false;
     float speed = 1.0f;
-    float ReadySpeed = 5f;
+    float ReadySpeed = 1f;
     float CurrentRate;
     bool Ready = false;
+    float RepeatTime = 0.5f;
 
     public void CreateWhite()
     {
@@ -23,6 +24,8 @@ public class MiniGamWin : MonoBehaviour
 
     IEnumerator WhiteProcess()
     {
+        whiteExists = true;
+        Ready = false;
         CurrentRate = 0;
         while (true)
         {
@@ -40,6 +43,7 @@ public class MiniGamWin : MonoBehaviour
 
         CurrentRate = 0;
         Ready = true;
+
         while (true)
         {
             CurrentRate += ReadySpeed * Time.deltaTime;
@@ -57,10 +61,22 @@ public class MiniGamWin : MonoBehaviour
 
     }
 
+    public bool PressedEnterOnTheRightTime()
+    {
+        if (whiteExists)
+        {
+            EndWhite();
+            print("Ready is " + Ready);
+            return Ready;
+        }
+        return false;
+    }
+
     public void EndWhite()
     {
         StopAllCoroutines();
         whiteExists = false;
         ImageManage.SetWhiteImageRateBefore(0);
+        Invoke("CreateWhite", RepeatTime);
     }
 }

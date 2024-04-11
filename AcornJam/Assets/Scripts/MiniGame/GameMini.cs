@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class GameMini : MonoBehaviour
@@ -8,9 +9,13 @@ public class GameMini : MonoBehaviour
 
     [SerializeField] InputSpace InputSpace;
 
+    [SerializeField] MiniGamWin miniGamWin;
+
     private float GameSpeed = 0;
 
-    private float LerpSpeedChange = 0.2f;
+    private float LerpSpeedChange;
+
+    private float LerpSpeedNormal = 0.2f;
 
     private float minSpeed = -1;
 
@@ -25,7 +30,17 @@ public class GameMini : MonoBehaviour
 
     private void SpacePressed()
     {
-        GameSpeed = SpaceSpeedChange;
+        if (miniGamWin.PressedEnterOnTheRightTime())
+        {
+            GameSpeed = SpaceSpeedChange;
+            LerpSpeedChange = 0;
+            Invoke("ResetSpeedChange",0.1f);
+        }
+    }
+
+    private void ResetSpeedChange()
+    {
+        LerpSpeedChange = LerpSpeedNormal;
     }
     public void StartGame()
     {
@@ -40,7 +55,9 @@ public class GameMini : MonoBehaviour
 
     IEnumerator MiniGame()
     {
+        LerpSpeedChange = LerpSpeedNormal;
         float FilledAmount = 0;
+        Invoke("StartWhite", 1);
         while (true)
         {
             yield return null;
@@ -48,10 +65,15 @@ public class GameMini : MonoBehaviour
             FilledAmount += Time.deltaTime * GameSpeed;
             ImageManage.SetImageRate( FilledAmount );
             SpeedChange();
+            FilledAmount = math.clamp( FilledAmount, 0, 1 );
 
         }
     }
 
+    private void StartWhite()
+    {
+        miniGamWin.CreateWhite();
+    }
     private void NormalizeSpeed()
     {
         GameSpeed = Mathf.Clamp(GameSpeed, minSpeed, maxSpeed);

@@ -85,9 +85,9 @@ public class LineCalculator : MonoBehaviour
     private int CalculateExpansionRate()
     {
         // <= 5 .  >= 6 is not possible
-        if (listExpension.Count > 8)
+        if (listExpension.Count > 3)
             return 1;
-        if (listExpension.Count > 2)
+        if (listExpension.Count > 1)
             return 2;
         if (listExpension.Count >= 0)
             return 3;
