@@ -15,6 +15,8 @@ public class GameMini : MonoBehaviour
     private float minSpeed = -1;
 
     private float maxSpeed = 1;
+
+    private float SpaceSpeedChange = -0.3f;
     void Start()
     {
         StartGame();
@@ -23,10 +25,17 @@ public class GameMini : MonoBehaviour
 
     private void SpacePressed()
     {
+        GameSpeed = SpaceSpeedChange;
     }
     public void StartGame()
     {
+        StartSettings();
         StartCoroutine(MiniGame());
+    }
+
+    private void StartSettings()
+    {
+        GameSpeed = 0.2f;
     }
 
     IEnumerator MiniGame()
@@ -38,7 +47,7 @@ public class GameMini : MonoBehaviour
             NormalizeSpeed();
             FilledAmount += Time.deltaTime * GameSpeed;
             ImageManage.SetImageRate( FilledAmount );
-            GameSpeed += LerpSpeedChange * Time.deltaTime;
+            SpeedChange();
 
         }
     }
@@ -46,5 +55,13 @@ public class GameMini : MonoBehaviour
     private void NormalizeSpeed()
     {
         GameSpeed = Mathf.Clamp(GameSpeed, minSpeed, maxSpeed);
+    }
+    private void SpeedChange()
+    {
+        GameSpeed += LerpSpeedChange * Time.deltaTime;
+        if(GameSpeed < 0 ) 
+        {
+            GameSpeed += LerpSpeedChange * Time.deltaTime;
+        }
     }
 }
