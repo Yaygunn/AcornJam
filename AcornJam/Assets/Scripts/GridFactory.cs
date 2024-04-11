@@ -12,11 +12,18 @@ public class GridFactory : MonoBehaviour
     [SerializeField] Transform GroundParent;
     [SerializeField] Transform WallParent;
 
+    [SerializeField] float MazeScaleUp;
+
     void Start()
     {
-        //CreateNew();
+        ScaleUpMaze();
     }
 
+    private void ScaleUpMaze()
+    {
+        GroundParent.localScale *= MazeScaleUp;
+        WallParent.localScale *= MazeScaleUp;
+    }
     public void RemakeMaze()
     {
         DeletePrevious();
