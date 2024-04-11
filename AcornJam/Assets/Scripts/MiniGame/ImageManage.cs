@@ -5,13 +5,20 @@ using UnityEngine;
 
 public class ImageManage : MonoBehaviour
 {
-    [SerializeField] Transform image;
+    [SerializeField] Transform BlackImage;
+    [SerializeField] Transform WhiteImage;
+
 
     private float BaseScale;
     [SerializeField] float FilledScale;
+
+    [SerializeField] float WhiteBaseScale;
+    [SerializeField] float WhiteReadyScale;
+    [SerializeField] float WhiteEndScale;
+
     void Start()
     {
-        BaseScale = image.localScale.x;
+        BaseScale = BlackImage.localScale.x;
     }
 
     public void SetImageRate(float rate)
@@ -20,8 +27,24 @@ public class ImageManage : MonoBehaviour
         SetImageScale(newScale);
     }
 
+    public void SetWhiteImageRateBefore(float rate)
+    {
+        float newScale = Mathf.Lerp(WhiteBaseScale, WhiteReadyScale, rate);
+        SetWhiteImageScale(newScale);
+    }
+
+    public void SetWhiteImageRateAfter(float rate)
+    {
+        float newScale = Mathf.Lerp(WhiteReadyScale, WhiteEndScale, rate);
+        SetWhiteImageScale(newScale);
+    }
+
     void SetImageScale(float scale)
     {
-        image.transform.localScale = new Vector3(scale, scale, scale);
+        BlackImage.transform.localScale = new Vector3(scale, scale, scale);
+    }
+    void SetWhiteImageScale(float scale)
+    {
+        WhiteImage.transform.localScale = new Vector3(scale, scale, scale);
     }
 }
