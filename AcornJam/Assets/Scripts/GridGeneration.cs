@@ -7,17 +7,17 @@ public class GridGeneration : MonoBehaviour
     public float edgeLength; // Length of each hexagon edge
     public Vector2Int gridSize; // Number of rows and columns in the grid
     public GridCell gridCellPrefab; // Prefab for the hexagonal cell
+    [SerializeField] GridManager gridManager;
     [SerializeField] Transform GroundParent;
 
     public void GenerateHexagonalGrid()
     {
-        GridManager.Instance.gridCells = new GridCell[gridSize.x, gridSize.y];
         for (int row = 0; row < gridSize.y; row++)
         {
             for (int col = 0; col < gridSize.x; col++)
             {
                 Vector3 position = CalculateHexagonPosition(col, row);
-                GridManager.Instance.gridCells[col, row] = Instantiate(gridCellPrefab, position, Quaternion.identity, GroundParent);
+                gridManager.gridCells[col, row] = Instantiate(gridCellPrefab, position, Quaternion.identity, GroundParent);
             }
         }
     }
