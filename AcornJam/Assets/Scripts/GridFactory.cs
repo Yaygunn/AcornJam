@@ -14,11 +14,6 @@ public class GridFactory : MonoBehaviour
 
     [SerializeField] float MazeScaleUp;
 
-    void Start()
-    {
-        ScaleUpMaze();
-    }
-
     private void ScaleUpMaze()
     {
         GroundParent.localScale *= MazeScaleUp;
@@ -35,12 +30,14 @@ public class GridFactory : MonoBehaviour
         gridGeneration.GenerateHexagonalGrid();
         lineCalculator.CalculateEdges();
         wallSpawner.GenerateAllTheWalls();
+        ScaleUpMaze();
     }
 
     void DeletePrevious()
     {
         DestroyAllChildObjects(GroundParent);
         DestroyAllChildObjects(WallParent);
+        ResetScale();
     }
     void DestroyAllChildObjects(Transform parent)
     {
@@ -55,6 +52,12 @@ public class GridFactory : MonoBehaviour
         }
 
 
+    }
+
+    private void ResetScale()
+    {
+        GroundParent.localScale = new Vector3(1, 1, 1);
+        WallParent.localScale = new Vector3(1, 1, 1);
     }
 
 
