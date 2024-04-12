@@ -30520,7 +30520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &602384623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52192,6 +52192,8 @@ MonoBehaviour:
   WhiteBaseScale: 13
   WhiteReadyScale: 1
   WhiteEndScale: 0.4
+  Target1: {fileID: 908982127}
+  Target2: {fileID: 1206235234}
 --- !u!4 &1058570963
 Transform:
   m_ObjectHideFlags: 0
@@ -66045,7 +66047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1305465853
 MonoBehaviour:
   m_ObjectHideFlags: 0

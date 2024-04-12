@@ -36,6 +36,8 @@ public class MiniGamWin : MonoBehaviour
                 break;
             }
 
+            ImageManage.SetTargetImageVisibility(CurrentRate * 0.1f);
+
             ImageManage.SetWhiteImageRateBefore(CurrentRate);
 
             yield return null;
@@ -77,6 +79,7 @@ public class MiniGamWin : MonoBehaviour
         StopAllCoroutines();
         whiteExists = false;
         ImageManage.SetWhiteImageRateBefore(0);
+        ImageManage.SetTargetImageVisibility(0);
         Invoke("CreateWhite", RepeatTime);
     }
 }

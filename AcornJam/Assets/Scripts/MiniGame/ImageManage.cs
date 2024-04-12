@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ImageManage : MonoBehaviour
 {
     [SerializeField] Transform BlackImage;
@@ -15,6 +15,10 @@ public class ImageManage : MonoBehaviour
     [SerializeField] float WhiteBaseScale;
     [SerializeField] float WhiteReadyScale;
     [SerializeField] float WhiteEndScale;
+
+    [SerializeField] Image Target1;
+    [SerializeField] Image Target2;
+
 
     void Start()
     {
@@ -46,5 +50,13 @@ public class ImageManage : MonoBehaviour
     void SetWhiteImageScale(float scale)
     {
         WhiteImage.transform.localScale = new Vector3(scale, scale, scale);
+    }
+
+    public void SetTargetImageVisibility(float rate)
+    {
+        Color c = Target1.color;
+        c.a = rate;
+        Target1.color = c;
+        Target2.color = c;
     }
 }
