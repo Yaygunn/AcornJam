@@ -19,7 +19,7 @@ public class GameMini : MonoBehaviour
 
     private float minSpeed = -1;
 
-    private float maxSpeed = 1;
+    private float maxSpeed = 0.3f;
 
     private float SpaceSpeedChange = -0.3f;
     void Start()

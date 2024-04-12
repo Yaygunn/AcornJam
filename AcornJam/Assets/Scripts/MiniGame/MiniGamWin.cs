@@ -13,6 +13,8 @@ public class MiniGamWin : MonoBehaviour
     float CurrentRate;
     bool Ready = false;
     float RepeatTime = 0.5f;
+    float FailRepeatTime = 0.4f;
+
 
     public void CreateWhite()
     {
@@ -52,6 +54,7 @@ public class MiniGamWin : MonoBehaviour
 
             if (CurrentRate >= 1)
             {
+                ImageManage.PressedSpace(false);
                 break;
             }
 
@@ -59,7 +62,7 @@ public class MiniGamWin : MonoBehaviour
 
             yield return null;
         }
-        EndWhite();
+        EndWhite(false);
 
     }
 
@@ -67,23 +70,28 @@ public class MiniGamWin : MonoBehaviour
     {
         if (whiteExists)
         {
-            EndWhite();
+            EndWhite(Ready);
             print("Ready is " + Ready);
-            if(Ready)
-            {
-            ImageManage.PressedSpace(true);
-            }
+            
+            ImageManage.PressedSpace(Ready);
+            
             return Ready;
         }
+
+        ImageManage.PressedSpace(false);
+
         return false;
     }
 
-    public void EndWhite()
+    public void EndWhite(bool success)
     {
         StopAllCoroutines();
         whiteExists = false;
-        ImageManage.SetWhiteImageRateBefore(0);
-        ImageManage.SetTargetImageVisibility(0);
-        Invoke("CreateWhite", RepeatTime);
+        //ImageManage.SetWhiteImageRateBefore(0);
+        //ImageManage.SetTargetImageVisibility(0);
+        if (success )
+            Invoke("CreateWhite", RepeatTime);
+        else
+            Invoke("CreateWhite", FailRepeatTime);
     }
 }

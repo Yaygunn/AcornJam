@@ -20,6 +20,8 @@ public class ImageManage : MonoBehaviour
     [SerializeField] Image Target1;
     [SerializeField] Image Target2;
 
+    [SerializeField] Color WhiteWhite;
+
     [SerializeField] Color TargetColorWhite;
     [SerializeField] Color TargetColorBlack;
     [SerializeField] Color TargetColorRed;
@@ -71,7 +73,7 @@ public class ImageManage : MonoBehaviour
                 SetTargetColor(TargetColorBlack);
                 SetWhiteImageRateBefore(rate);
                 SetTargetImageVisibility(rate);
-                rate -= 10 * Time.deltaTime;
+                rate -= 5 * Time.deltaTime;
                 yield return null;
             }
             SetWhiteImageRateBefore(rate);
@@ -80,18 +82,19 @@ public class ImageManage : MonoBehaviour
         else
         {
             SetTargetColor(TargetColorRed);
-            WhiteViewImage.color = TargetColorRed;
+            SetWhiteImageRateBefore(0);
+            SetTargetImageVisibility(1);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.25f);
 
+        }
             ResetColor();
             SetTargetImageVisibility(0);
-        }
+            SetWhiteImageRateBefore(0);
     }
 
     private void ResetColor()
     {
-        WhiteViewImage.color = TargetColorWhite;
         Target1.color = TargetColorWhite;
         Target2.color = TargetColorWhite;   
     }
