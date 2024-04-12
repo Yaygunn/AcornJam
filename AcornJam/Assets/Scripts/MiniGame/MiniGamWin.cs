@@ -20,8 +20,8 @@ public class MiniGamWin : MonoBehaviour
     {
         if (whiteExists)
             return;
-
-        StartCoroutine(WhiteProcess());
+        if(gameMini.GameContinue)
+            StartCoroutine(WhiteProcess());
     }
 
     IEnumerator WhiteProcess()
@@ -78,8 +78,6 @@ public class MiniGamWin : MonoBehaviour
             return Ready;
         }
 
-        ImageManage.PressedSpace(false);
-
         return false;
     }
 
@@ -93,5 +91,11 @@ public class MiniGamWin : MonoBehaviour
             Invoke("CreateWhite", RepeatTime);
         else
             Invoke("CreateWhite", FailRepeatTime);
+    }
+
+    public void EndWhite()
+    {
+        StopAllCoroutines();
+        whiteExists = false;
     }
 }

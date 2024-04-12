@@ -22,6 +22,10 @@ public class GameMini : MonoBehaviour
     private float maxSpeed = 0.3f;
 
     private float SpaceSpeedChange = -0.3f;
+
+    private bool ControlSuccess = false;
+
+    [HideInInspector] public bool GameContinue; 
     void Start()
     {
         StartGame();
@@ -44,6 +48,7 @@ public class GameMini : MonoBehaviour
     }
     public void StartGame()
     {
+        GameContinue = true;
         StartSettings();
         StartCoroutine(MiniGame());
     }
@@ -55,11 +60,14 @@ public class GameMini : MonoBehaviour
 
     IEnumerator MiniGame()
     {
+        ControlSuccess = false;
         LerpSpeedChange = LerpSpeedNormal;
         float FilledAmount = 0;
-        Invoke("StartWhite", 1);
-        while (Successeded(FilledAmount))
+        Invoke("StartWhite", 1.7f);
+        Invoke("StartControl", 2f);
+        while (NotSuccesseded(FilledAmount))
         {
+  
             yield return null;
             NormalizeSpeed();
             FilledAmount += Time.deltaTime * GameSpeed;
@@ -71,16 +79,25 @@ public class GameMini : MonoBehaviour
         Succeded();
     }
 
+    private void StartControl()
+    {
+        ControlSuccess = true;
+    }
     private void Succeded()
     {
         print("MiniGameSuccess");
+        GameContinue = false;
+        miniGamWin.EndWhite();
+        ImageManage.End();
     }
 
-    private bool Successeded(float rate)
+    private bool NotSuccesseded(float rate)
     {
-        if(rate < 0.05f)
-            return true; 
-        return false;
+        if(!ControlSuccess)
+            return true;
+        if(rate < 0.4f)
+            return false; 
+        return true;
     }
 
     private void StartWhite()
@@ -96,7 +113,7 @@ public class GameMini : MonoBehaviour
         GameSpeed += LerpSpeedChange * Time.deltaTime;
         if(GameSpeed < 0 ) 
         {
-            GameSpeed += LerpSpeedChange * Time.deltaTime;
+            GameSpeed += LerpSpeedChange * Time.deltaTime * 0.5f;
         }
     }
 }

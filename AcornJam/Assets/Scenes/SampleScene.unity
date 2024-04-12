@@ -49271,6 +49271,7 @@ MonoBehaviour:
   ImageManage: {fileID: 1058570962}
   InputSpace: {fileID: 166478861}
   miniGamWin: {fileID: 1058570965}
+  GameContinue: 0
 --- !u!114 &1058570965
 MonoBehaviour:
   m_ObjectHideFlags: 0

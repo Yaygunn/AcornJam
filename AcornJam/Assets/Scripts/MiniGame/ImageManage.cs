@@ -30,6 +30,7 @@ public class ImageManage : MonoBehaviour
     void Start()
     {
         BaseScale = BlackImage.localScale.x;
+        End();
     }
 
     public void SetImageRate(float rate)
@@ -88,9 +89,16 @@ public class ImageManage : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
 
         }
-            ResetColor();
-            SetTargetImageVisibility(0);
-            SetWhiteImageRateBefore(0);
+        End();   
+    }
+
+    public void End()
+    {
+        StopAllCoroutines();
+        ResetColor();
+        SetTargetImageVisibility(0);
+        SetWhiteImageRateBefore(0);
+        SetImageRate(0);
     }
 
     private void ResetColor()
