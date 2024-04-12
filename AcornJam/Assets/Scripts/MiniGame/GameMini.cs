@@ -58,16 +58,29 @@ public class GameMini : MonoBehaviour
         LerpSpeedChange = LerpSpeedNormal;
         float FilledAmount = 0;
         Invoke("StartWhite", 1);
-        while (true)
+        while (Successeded(FilledAmount))
         {
             yield return null;
             NormalizeSpeed();
             FilledAmount += Time.deltaTime * GameSpeed;
             ImageManage.SetImageRate( FilledAmount );
             SpeedChange();
-            FilledAmount = math.clamp( FilledAmount, 0, 1 );
+            FilledAmount = math.clamp( FilledAmount, -0.2f, 1 );
 
         }
+        Succeded();
+    }
+
+    private void Succeded()
+    {
+        print("MiniGameSuccess");
+    }
+
+    private bool Successeded(float rate)
+    {
+        if(rate < 0.05f)
+            return true; 
+        return false;
     }
 
     private void StartWhite()
