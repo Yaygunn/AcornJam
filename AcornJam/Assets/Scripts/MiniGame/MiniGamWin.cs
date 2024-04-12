@@ -69,6 +69,10 @@ public class MiniGamWin : MonoBehaviour
         {
             EndWhite();
             print("Ready is " + Ready);
+            if(Ready)
+            {
+            ImageManage.PressedSpace(true);
+            }
             return Ready;
         }
         return false;
