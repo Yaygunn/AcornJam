@@ -11659,7 +11659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   edgeLength: 2.055
-  gridSize: {x: 20, y: 20}
+  gridSize: {x: 10, y: 10}
   gridCellPrefab: {fileID: 9128160020896658906, guid: b2963b48e34d3b842bfadb1bb52703b6,
     type: 3}
   gridManager: {fileID: 1998015117}
@@ -52192,8 +52192,12 @@ MonoBehaviour:
   WhiteBaseScale: 13
   WhiteReadyScale: 1
   WhiteEndScale: 0.4
+  WhiteViewImage: {fileID: 103704145}
   Target1: {fileID: 908982127}
   Target2: {fileID: 1206235234}
+  TargetColorWhite: {r: 1, g: 1, b: 1, a: 0}
+  TargetColorBlack: {r: 0, g: 0, b: 0, a: 0}
+  TargetColorRed: {r: 0.45490196, g: 0, b: 0, a: 0}
 --- !u!4 &1058570963
 Transform:
   m_ObjectHideFlags: 0
